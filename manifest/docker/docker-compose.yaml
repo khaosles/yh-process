@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  gfs-task:
+    build:
+      context: ./
+      dockerfile: Dockerfile_gfs
+    container_name: gfs-task
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ${API_VOLUME}:/opt/service/yh-process
+      - ${DATA_VOLUME}:/data/forecast
+    entrypoint: [ "/bin/sh", "-c", "chmod +x /opt/service/yh-process/yh-process-gfs && /opt/service/yh-process/yh-process-gfs" ]
+  download:
+    build:
+      context: ./
+      dockerfile: Dockerfile_download
+    container_name: download
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "15100:15100"
+    volumes:
+      - ${API_VOLUME}:/opt/service/yh-process
+      - ${DATA_VOLUME}:/data/forecast
+    entrypoint: [ "/bin/sh", "-c", "chmod +x /opt/service/yh-process/yh-process-dwonload && /opt/service/yh-process/yh-process-dwonload --host=192.168.1.14 --port=15100" ]

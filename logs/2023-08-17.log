@@ -1,0 +1,3 @@
+2023-08-17 21:43:21.585	PANIC	consumer/consumer.go:44	new Namesrv failed.: no name server addr found with resolver: passthrough resolver of []
+2023-08-17 21:43:47.385	PANIC	consumer/consumer.go:44	new Namesrv failed.: no name server addr found with resolver: passthrough resolver of []
+2023-08-17 21:55:44.610	PANIC	consumer/consumer.go:44	new Namesrv failed.: no name server addr found with resolver: passthrough resolver of []

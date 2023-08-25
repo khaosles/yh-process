@@ -1,0 +1,18 @@
+FROM ubuntu:20.04
+
+ENV TZ=Asia/Shanghai
+RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+ENV  BASE /opt/service/yh-process
+RUN mkdir -p $BASE
+WORKDIR $BASE
+
+RUN apt update
+RUN apt install -y wget unzip
+
+# 安装GDAL相关依赖
+RUN apt install -y build-essential
+RUN apt install -y binutils libgdal-dev --no-install-recommends
+RUN apt install -y gdal-bin
+
+RUN echo "\033[32mbuild success!\033[0m"
+

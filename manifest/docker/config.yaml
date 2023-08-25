@@ -1,0 +1,41 @@
+http:
+  download:
+    host: 0.0.0.0
+    port: 15051
+    mode: debug
+etcd:
+  nodes:
+    - 192.168.1.9:12379
+    - 192.168.1.9:22379
+    - 192.168.1.9:32379
+  username: root
+  password: Hthj150328.
+  timeout: 60
+  ttl: 10
+pgsql:
+  host: 192.168.1.9
+  port: 15432
+  config: ""
+  db-name: yh_forecast
+  username: postgres
+  password: Hthj150328.
+  prefix: ""
+  singular: true
+  engine: ""
+  max-idle-conns: 10
+  max-open-conns: 100
+  max-life-time: 5
+  log-mode: debug
+  log-zap: true
+redis:
+  addr: 192.168.1.9:6379
+  password: Hthj150328.
+  db: 6
+logging:
+  level-console: debug      # 控制台日志等级
+  level-file: error         # 文件日志等级
+  path: "./logs"            # 日志保存路径，默认程序路径下的logs目录
+  max-history: 7            # 日志保存时间
+  log-in-console: true      # 是否输出到控制台
+  log-in-file: true         # 是否输出到文件
+  show-line: true           # 显示行数
