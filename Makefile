@@ -6,14 +6,14 @@ RELEASE?=1.0.0
 COMMIT?=$(shell git rev-parse --short HEAD)
 BUILD_TIME?=$(shell TZ="Asia/Shanghai" date '+%Y-%m-%d_%H:%M:%S')
 OUTDIR?=../../manifest/docker
-TAG?=pack
+TAGS?=pack
 
 pack:
 	go-bindata -pkg packed -o ./internal/packed/packed.go ./manifest/config/config.yaml
 
 build:
 	go mod tidy && \
-	cd ./cmd/gfs && GOOS=linux GOARCH=amd64  go build -tags "pack" -o ${OUTDIR}/yh-process-gfs   \
-    && cd ../download && GOOS=linux GOARCH=amd64  go build -tags "pack" -o ${OUTDIR}/yh-process-download \
+	cd ./cmd/gfs && GOOS=linux GOARCH=amd64  go build -tags "${TAGS}" -o ${OUTDIR}/yh-process-gfs   \
+    && cd ../download && GOOS=linux GOARCH=amd64  go build -tags "${TAGS}" -o ${OUTDIR}/yh-process-download \
     && echo "build succeed!"
 

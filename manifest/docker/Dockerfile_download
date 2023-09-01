@@ -1,10 +1,8 @@
-FROM alpine
+FROM ubuntu:22.04
 
-RUN apk add tzdata
 ENV TZ=Asia/Shanghai
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ENV  BASE /opt/service/yh-process
 WORKDIR $BASE
 
-ENTRYPOINT ["/bin/sh", "-c", "chmod +x $BASE/yh-process-download && $BASE/yh-process-download"]

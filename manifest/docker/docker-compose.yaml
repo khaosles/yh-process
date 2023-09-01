@@ -1,28 +1,36 @@
 version: '3.5'
 services:
-  gfs-task:
+  gfs:
     build:
       context: ./
-      dockerfile: Dockerfile_gfs
-    container_name: gfs-task
+      dockerfile: Dockerfile_task
+    container_name: yh-process-gfs
     restart: always
     env_file:
       - .env
+    network_mode: host
     volumes:
-      - ${API_VOLUME}:/opt/service/yh-process
-      - ${DATA_VOLUME}:/data/forecast
-    entrypoint: [ "/bin/sh", "-c", "chmod +x /opt/service/yh-process/yh-process-gfs && /opt/service/yh-process/yh-process-gfs" ]
+      - ${API_VOLUME}:${API_VOLUME}
+      - ${DATA_VOLUME}:${DATA_VOLUME}
+    environment:
+      - BASE=${API_VOLUME}
+    entrypoint: [ "/bin/sh", "-c", "chmod +x ${API_VOLUME}/yh-process-gfs && ${API_VOLUME}/yh-process-gfs" ]
+
   download:
     build:
       context: ./
       dockerfile: Dockerfile_download
-    container_name: download
+    container_name: yh-process-download
     restart: always
     env_file:
       - .env
     ports:
-      - "15100:15100"
+      - "9001:9001"
+    network_mode: host
     volumes:
-      - ${API_VOLUME}:/opt/service/yh-process
-      - ${DATA_VOLUME}:/data/forecast
-    entrypoint: [ "/bin/sh", "-c", "chmod +x /opt/service/yh-process/yh-process-dwonload && /opt/service/yh-process/yh-process-dwonload --host=192.168.1.14 --port=15100" ]
+      - ${API_VOLUME}:${API_VOLUME}
+      - ${DATA_VOLUME}:${DATA_VOLUME}
+    environment:
+      - BASE=${API_VOLUME}
+    entrypoint: [ "/bin/sh", "-c", "chmod +x ${API_VOLUME}/yh-process-download && ${API_VOLUME}/yh-process-download --host=192.168.1.14 --port=9001" ]
+

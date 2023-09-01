@@ -1,5 +1,12 @@
 package main
 
+import (
+	"strings"
+
+	"yh-process/internal/service/task/gfs"
+	"yh-process/internal/service/task/util"
+)
+
 /*
    @File: main.go
    @Author: khaosles
@@ -8,6 +15,17 @@ package main
 */
 
 func main() {
+
+	url := "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25_1hr.pl?dir=%2Fgfs.20230829%2F00%2Fatmos&file=gfs.t00z.pgrb2.0p25.f{FFF}&var_UGRD=on&var_VGRD=on&lev_10_m_above_ground=on"
+	baseName := "/Users/yherguot/doraemon/data/gfs/tmp/gfs.t00z.pgrb2.0p25.f{FFF}"
+
+	hours := gfs.GetHours()
+	for _, hour := range hours {
+		baseUrl := strings.Replace(url, "{FFF}", hour, -1)
+		fileName := strings.Replace(baseName, "{FFF}", hour, -1)
+		util.Download(baseUrl, fileName+".tmp", fileName, 3)
+	}
+
 	//now := time.Now()
 	//filepath := "/Users/yherguot/doraemon/data/yh/stofs_2d_glo.t00z.fields.cwl.nc"
 	//outpath := "/Users/yherguot/doraemon/data/gfs/product/stofs/cwl1"

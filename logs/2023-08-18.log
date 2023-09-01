@@ -1,2 +1,0 @@
-2023-08-18 14:58:10.988	ERROR	sea-forecast/c.go:50	file not found ===> /Users/yherguot/doraemon/data/gfs/tmp/temperature_2m/temperature_2m_000.tif
-2023-08-18 14:58:51.864	ERROR	sea-forecast/c.go:50	file not found ===> /Users/yherguot/doraemon/data/gfs/tmp/temperature_2m/temperature_2m_000.tif

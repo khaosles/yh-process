@@ -89,7 +89,7 @@ func (n *GfsWaveTiffDataProcessor) Execute() *node2.Result {
 			err = fmt.Errorf("file not exist ===> %s", op16)
 			goto returntag
 		}
-		if !fileutil.IsFile(gribfile) {
+		if !fileutil.IsFile(nclist[i]) {
 			// 执行cmd grib2转cn
 			err = util.ExecGrib2Netcdf(gribfile, nclist[i])
 			if err != nil {

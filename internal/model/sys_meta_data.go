@@ -13,6 +13,7 @@ import (
 
 type SysMetaData struct {
 	BaseModel
+	NodeName   string    `json:"nodeName" gorm:"type:varchar(100);index;comment:节点名称"`
 	DataType   string    `json:"dataType" gorm:"type:varchar(100);index;comment:数据类型"`
 	ElemName   string    `json:"elemName" gorm:"type:varchar(100);index;comment:要素名称"`
 	Version    int64     `json:"version" gorm:"type:int;comment:当前版本号"`

@@ -50,3 +50,11 @@ func (dao sysMetaDataDao) UpdateVersion(data *model.SysMetaData, dataTime, repor
 		glog.Error(err)
 	}
 }
+
+func (dao sysMetaDataDao) GetByNode(nodeName string) []*model.SysMetaData {
+	data, err := dao.Select(&model.SysMetaData{NodeName: nodeName})
+	if err != nil {
+		glog.Error(err)
+	}
+	return data
+}
